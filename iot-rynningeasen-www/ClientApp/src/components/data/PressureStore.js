@@ -5,6 +5,10 @@ class PressureStore extends EventEmitter {
         super();
         this.currentPressure = "Getting latest pressure measurement";
     }
+
+    getCurrentPressure() {
+        return this.currentPressure;
+    }
 }
 
 const pressureStore = new PressureStore();

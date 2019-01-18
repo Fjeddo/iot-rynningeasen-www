@@ -5,6 +5,10 @@ class TemperatureStore extends EventEmitter {
         super();
         this.currentTemperature = "Getting latest temperature measurement";
     }
+
+    getCurrentTemperature() {
+        return this.currentTemperature;
+    }
 }
 
 const temperatureStore = new TemperatureStore();
