@@ -21,6 +21,10 @@ namespace iot_rynningeasen_www
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddSignalR();
+
+            services.AddHostedService<MqttService>();
+
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -42,6 +46,8 @@ namespace iot_rynningeasen_www
 
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+
+            app.UseSignalR(routes => { routes.MapHub<MeasurementsHub>("/serverpush"); });
 
             app.UseMvc(routes =>
             {
