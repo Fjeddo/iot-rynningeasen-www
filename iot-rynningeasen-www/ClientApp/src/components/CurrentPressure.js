@@ -27,10 +27,12 @@ class CurrentPressure extends React.Component {
     }
 
     render() {
+        var greenText = { color: 'green' };
+
         return (
             <div>
-                <h2>Current pressure</h2>
-                <h3>{this.state.currentPressure}</h3>
+                <h3>Current pressure</h3>
+                <h2 style={greenText}>{this.state.currentPressure}</h2>
             </div>
         );
     }

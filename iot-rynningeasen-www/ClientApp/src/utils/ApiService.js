@@ -3,22 +3,21 @@ import { HubConnectionBuilder, LogLevel } from '@aspnet/signalr';
 
 class ApiService {
     constructor() {
-        // set up signlaR etc...
-
         hubConnection.start().then(() => console.log('HubConnection started'));
+
         hubConnection.on('newpressure', (receivedMessage) => {
             console.log('Received ' + JSON.stringify(receivedMessage));
             this.receivePressureUpdates(receivedMessage);
         });
-
-        /*setInterval(() => {
-            this.receiveServerUpdates(Date.now());
-        }, 2000);*/
+        
+        hubConnection.on('newtemperature', (receivedMessage) => {
+            console.log('Received ' + JSON.stringify(receivedMessage));
+            this.receiveTemperatureUpdates(receivedMessage);
+        });
     }
 
-    receiveServerUpdates(data) {
+    receiveTemperatureUpdates(data) {
         ActionCreator.updateCurrentTemperature(data);
-        ActionCreator.updateCurrentPressure(data + Date.now());
     }
 
     receivePressureUpdates(data) {

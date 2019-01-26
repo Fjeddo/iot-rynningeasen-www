@@ -5,7 +5,7 @@ import { ACTION_TYPES } from './ActionTypes';
 class PressureStore extends EventEmitter {
     constructor() {
         super();
-        this.currentPressure = "Getting latest pressure measurement";
+        this.currentPressure = "...";
     }
 
     getCurrentPressure() {

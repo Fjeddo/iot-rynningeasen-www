@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using uPLibrary.Networking.M2Mqtt;
 
 namespace iot_rynningeasen_www
 {
@@ -16,23 +17,18 @@ namespace iot_rynningeasen_www
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSignalR();
 
+            services.AddSingleton(typeof(MqttClient), new MqttClient(Configuration["Mqtt:Host"]));
             services.AddHostedService<MqttService>();
 
-            // In production, the React files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/build";
-            });
+            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -44,6 +40,21 @@ namespace iot_rynningeasen_www
                 app.UseExceptionHandler("/Error");
             }
 
+            // Special for "old site" requests
+            app.Use(async (context, next) =>
+            {
+                var pathValue = context.Request.Path.Value;
+                if (pathValue.EndsWith("/temp") || pathValue.EndsWith("/temp/"))
+                {
+                    context.Request.Path = "/temp/index.html";
+                    await next();
+                }
+                else
+                {
+                    await next();
+                }
+            });
+
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
@@ -51,9 +62,7 @@ namespace iot_rynningeasen_www
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
+                routes.MapRoute("default", "{controller}/{action=Index}/{id?}");
             });
 
             app.UseSpa(spa =>
@@ -62,7 +71,7 @@ namespace iot_rynningeasen_www
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
+                    spa.UseReactDevelopmentServer("start");
                 }
             });
         }

@@ -5,7 +5,7 @@ import { ACTION_TYPES } from './ActionTypes';
 class TemperatureStore extends EventEmitter {
     constructor() {
         super();
-        this.currentTemperature = "Getting latest temperature measurement";
+        this.currentTemperature = "...";
     }
 
     getCurrentTemperature() {

@@ -27,10 +27,12 @@ class CurrentTemperature extends React.Component {
     }
 
     render() {
+        var greenText = { color: 'green' };
+
         return (
             <div>
-                <h2>Current temperature</h2>
-                <h3>{this.state.currentTemperature}</h3>
+                <h3>Current temperature</h3>
+                <h2 style={greenText}>{this.state.currentTemperature}</h2>
             </div>
         );
     }
