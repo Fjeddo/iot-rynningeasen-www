@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
@@ -28,8 +30,8 @@ namespace iot_rynningeasen_www.Controllers
             var pressureValue = pressureGroup?.Values.FirstOrDefault(x => x.Key == "sensor:102:pressure").Value;
             var tempValue = tempGroup?.Values.FirstOrDefault(x => x.Key == "sensor:101:temp").Value;
 
-            CurrentPressure = pressureValue != null ? $"{pressureValue:N2}" : "N/A";
-            CurrentTemperature = tempValue != null ? $"{tempValue:N2}" : "N/A";
+            CurrentPressure = pressureValue != null ? $"{pressureValue:F2}" : "N/A";
+            CurrentTemperature = tempValue != null ? $"{tempValue:F2}" : "N/A";
 
             if (pressureValue != null)
             {
