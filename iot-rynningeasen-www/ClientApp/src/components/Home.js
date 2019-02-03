@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CurrentTemperature from './CurrentTemperature';
 import CurrentPressure from './CurrentPressure';
+import IFrame from './IFrame';
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -10,6 +11,7 @@ export class Home extends Component {
       <div>
         <h1>Current measurements @ Rynningeåsen</h1>
         <CurrentTemperature />
+        <IFrame src={'https://api.thingspeak.com/channels/658485/charts/1?title=Senaste+timmen&width=auto&height=400&results=60&dynamic=true'}/>
         <CurrentPressure />
       </div>
     );
