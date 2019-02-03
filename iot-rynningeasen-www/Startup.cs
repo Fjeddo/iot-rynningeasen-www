@@ -23,9 +23,6 @@ namespace iot_rynningeasen_www
 
             services.AddSignalR();
 
-            services.AddSingleton(typeof(MqttClient), new MqttClient(Configuration["Mqtt:Host"]));
-            services.AddHostedService<MqttService>();
-
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
         }
 

@@ -7,7 +7,7 @@ namespace iot_rynningeasen_www.Controllers
     {
         public ActionResult<string> Get()
         {
-            return Ok(MqttService.Pressure);
+            return Ok(MeasurementsController.CurrentPressure);
         }
     }
 }
