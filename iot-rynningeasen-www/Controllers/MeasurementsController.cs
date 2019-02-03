@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.TagHelpers.Internal;
 using Microsoft.AspNetCore.SignalR;
 
 namespace iot_rynningeasen_www.Controllers
@@ -33,16 +34,9 @@ namespace iot_rynningeasen_www.Controllers
             CurrentPressure = pressureValue != null ? $"{pressureValue:F2}" : "N/A";
             CurrentTemperature = tempValue != null ? $"{tempValue:F2}" : "N/A";
 
-            if (pressureValue != null)
-            {
-                _hub.Clients.All.SendAsync("newpressure", pressureValue);
-            }
-
-            if (tempValue != null)
-            {
-                _hub.Clients.All.SendAsync("newtemperature", tempValue);
-            }
-
+            _hub.Clients.All.SendAsync("newpressure", CurrentPressure);
+            _hub.Clients.All.SendAsync("newtemperature", CurrentTemperature);
+            
             return Ok();
         }
     }
