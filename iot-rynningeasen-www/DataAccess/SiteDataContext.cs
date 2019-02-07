@@ -9,7 +9,7 @@ namespace iot_rynningeasen_www.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=sitedata.db");
+            optionsBuilder.UseSqlite("Data Source=App_Data/sitedata.db");
         }
     }
 }
