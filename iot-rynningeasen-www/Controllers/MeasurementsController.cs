@@ -39,7 +39,7 @@ namespace iot_rynningeasen_www.Controllers
 
         [HttpPost]
         [Route("temperature")]
-        public IActionResult Post([FromBody] Temperature temperature)
+        public IActionResult PostTemperature([FromBody] Temperature temperature)
         {
             CurrentTemperature = $"{temperature.Value:F1}";
             _hub.Clients.All.SendAsync("newtemperature", CurrentTemperature);
@@ -49,7 +49,7 @@ namespace iot_rynningeasen_www.Controllers
 
         [HttpPost]
         [Route("pressure")]
-        public IActionResult Post([FromBody] Pressure pressure)
+        public IActionResult PostPressure([FromBody] Pressure pressure)
         {
             CurrentPressure = $"{pressure.Value}";
             _hub.Clients.All.SendAsync("newpressure", CurrentPressure);
