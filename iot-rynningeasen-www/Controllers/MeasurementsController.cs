@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.TagHelpers.Internal;
 using Microsoft.AspNetCore.SignalR;
 
 namespace iot_rynningeasen_www.Controllers
@@ -37,6 +34,24 @@ namespace iot_rynningeasen_www.Controllers
             _hub.Clients.All.SendAsync("newpressure", CurrentPressure);
             _hub.Clients.All.SendAsync("newtemperature", CurrentTemperature);
             
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("temperature")]
+        public IActionResult Post([FromBody] Temperature temperature)
+        {
+            _hub.Clients.All.SendAsync("newtemperature", $"{temperature.Value:F1}");
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("pressure")]
+        public IActionResult Post([FromBody] Pressure pressure)
+        {
+            _hub.Clients.All.SendAsync("newpressure", $"{pressure.Value}");
+
             return Ok();
         }
     }
