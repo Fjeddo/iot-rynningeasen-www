@@ -15,6 +15,13 @@ class ActionCreator {
 
         console.log("Created action: " + JSON.stringify(action));
     }
+
+    updateCurrentHumidity(humidity) {
+        var action = { type : ACTION_TYPES.UPDATE_CURRENT_HUMIDITY, data : humidity };
+        Dispatcher.dispatch(action);
+
+        console.log("Created action: " + JSON.stringify(action));
+    }
 }
 
 const actionCreator = new ActionCreator();
