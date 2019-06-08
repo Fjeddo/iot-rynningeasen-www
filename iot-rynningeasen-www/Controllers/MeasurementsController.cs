@@ -10,6 +10,7 @@ namespace iot_rynningeasen_www.Controllers
     public class MeasurementsController : ControllerBase
     {
         public static string CurrentPressure = "waiting...";
+        public static string CurrentHumidity = "waiting...";
         public static string CurrentTemperature = "waiting...";
 
         private readonly IHubContext<MeasurementsHub> _hub;
@@ -17,24 +18,6 @@ namespace iot_rynningeasen_www.Controllers
         public MeasurementsController(IHubContext<MeasurementsHub> hub)
         {
             _hub = hub;
-        }
-
-        [HttpPost]
-        public IActionResult Post([FromBody] List<SensorGroup> sensorGroups)
-        {
-            var pressureGroup = sensorGroups.FirstOrDefault(x => x.Name == "pressure");
-            var tempGroup = sensorGroups.FirstOrDefault(x => x.Name == "temp");
-
-            var pressureValue = pressureGroup?.Values.FirstOrDefault(x => x.Key == "sensor:102:pressure").Value;
-            var tempValue = tempGroup?.Values.FirstOrDefault(x => x.Key == "sensor:101:temp").Value;
-
-            CurrentPressure = pressureValue != null ? $"{pressureValue:F2}" : "N/A";
-            CurrentTemperature = tempValue != null ? $"{tempValue:F2}" : "N/A";
-
-            _hub.Clients.All.SendAsync("newpressure", CurrentPressure);
-            _hub.Clients.All.SendAsync("newtemperature", CurrentTemperature);
-            
-            return Ok();
         }
 
         [HttpPost]
@@ -53,6 +36,16 @@ namespace iot_rynningeasen_www.Controllers
         {
             CurrentPressure = $"{pressure.Value}";
             _hub.Clients.All.SendAsync("newpressure", CurrentPressure);
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("humidity")]
+        public IActionResult PostHumidity([FromBody] Humidity humidity)
+        {
+            CurrentHumidity = $"{humidity.Value}";
+            _hub.Clients.All.SendAsync("newhumidity", CurrentHumidity);
 
             return Ok();
         }
