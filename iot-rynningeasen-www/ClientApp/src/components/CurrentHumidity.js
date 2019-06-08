@@ -32,7 +32,7 @@ class CurrentHumidity extends React.Component {
         return (
             <div>
                 <h3>Current humidity</h3>
-                <h2 style={greenText}>{this.state.currentHumidity} hPa</h2>
+                <h2 style={greenText}>{this.state.currentHumidity} %</h2>
             </div>
         );
     }
