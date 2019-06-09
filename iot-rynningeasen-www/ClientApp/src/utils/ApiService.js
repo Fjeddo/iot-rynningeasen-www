@@ -14,6 +14,11 @@ class ApiService {
             console.log('Received ' + JSON.stringify(receivedMessage));
             this.receiveTemperatureUpdates(receivedMessage);
         });
+
+        hubConnection.on('newhumidity', (receivedMessage) => {
+            console.log('Received ' + JSON.stringify(receivedMessage));
+            this.receiveHumidityUpdates(receivedMessage);
+        });
     }
 
     receiveTemperatureUpdates(data) {
@@ -22,6 +27,10 @@ class ApiService {
 
     receivePressureUpdates(data) {
         ActionCreator.updateCurrentPressure(data);
+    }
+
+    receiveHumidityUpdates(data) {
+        ActionCreator.updateCurrentHumidity(data);
     }
 
 };
