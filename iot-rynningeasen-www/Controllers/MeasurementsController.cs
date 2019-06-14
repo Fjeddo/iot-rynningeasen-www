@@ -22,6 +22,7 @@ namespace iot_rynningeasen_www.Controllers
 
         [HttpPost]
         [Route("temperature")]
+        [TypeFilter(typeof(MeasurementLoggingAttribute), Arguments = new object[] {"temperature"})]
         public IActionResult PostTemperature([FromBody] Temperature temperature)
         {
             CurrentTemperature = $"{temperature.Value:F1}";
@@ -32,6 +33,7 @@ namespace iot_rynningeasen_www.Controllers
 
         [HttpPost]
         [Route("pressure")]
+        [TypeFilter(typeof(MeasurementLoggingAttribute), Arguments = new object[] {"pressure"})]
         public IActionResult PostPressure([FromBody] Pressure pressure)
         {
             CurrentPressure = $"{pressure.Value}";
@@ -42,6 +44,7 @@ namespace iot_rynningeasen_www.Controllers
 
         [HttpPost]
         [Route("humidity")]
+        [TypeFilter(typeof(MeasurementLoggingAttribute), Arguments = new object[] { "humidity" })]
         public IActionResult PostHumidity([FromBody] Humidity humidity)
         {
             CurrentHumidity = $"{humidity.Value}";
