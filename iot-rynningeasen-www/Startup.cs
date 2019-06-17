@@ -5,9 +5,8 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Log4Net;
 
-namespace iot_rynningeasen_www
+namespace IoTRynningeasenWWW
 {
     public class Startup
     {
@@ -16,16 +15,13 @@ namespace iot_rynningeasen_www
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public static IConfiguration Configuration { get; private set; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             services.AddSignalR();
-
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
-
             services.AddScoped<MeasurementLoggingAttribute>();
         }
 

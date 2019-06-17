@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace iot_rynningeasen_www
+namespace IoTRynningeasenWWW
 {
     public class SensorGroup
     {

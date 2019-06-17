@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 
-namespace iot_rynningeasen_www
+namespace IoTRynningeasenWWW
 {
     public class MeasurementsHub : Hub
     {}

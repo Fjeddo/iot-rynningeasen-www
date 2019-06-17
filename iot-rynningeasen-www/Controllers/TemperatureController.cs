@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace iot_rynningeasen_www.Controllers
+namespace IoTRynningeasenWWW.Controllers
 {
     [Route("api/[controller]")]
     public class TemperatureController : Controller

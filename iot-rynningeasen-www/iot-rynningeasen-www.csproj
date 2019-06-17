@@ -7,7 +7,7 @@
     <IsPackable>false</IsPackable>
     <SpaRoot>ClientApp\</SpaRoot>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
-    <RootNamespace>iot_rynningeasen_www</RootNamespace>
+    <RootNamespace>IotRynningeasenWWW</RootNamespace>
     <UserSecretsId>0db7e6f8-887f-40d0-a172-29256f373996</UserSecretsId>
   </PropertyGroup>
 

@@ -1,4 +1,4 @@
-﻿namespace iot_rynningeasen_www
+﻿namespace IoTRynningeasenWWW
 {
     public class Pressure : ISensor
     {
