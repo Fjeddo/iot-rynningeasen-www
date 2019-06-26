@@ -19,6 +19,11 @@ class ApiService {
             console.log('Received ' + JSON.stringify(receivedMessage));
             this.receiveHumidityUpdates(receivedMessage);
         });
+
+        hubConnection.on('newaverage', (receivedMessage) => {
+            console.log('Received ' + JSON.stringify(receivedMessage));
+            this.receiveAverageUpdates(receivedMessage);
+        });
     }
 
     receiveTemperatureUpdates(data) {
@@ -33,6 +38,9 @@ class ApiService {
         ActionCreator.updateCurrentHumidity(data);
     }
 
+    receiveAverageUpdates(data) {
+        ActionCreator.updateAverage(data);
+    }
 };
 
 const hubConnection = new HubConnectionBuilder()

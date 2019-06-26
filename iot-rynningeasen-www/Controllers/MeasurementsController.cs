@@ -10,12 +10,23 @@ namespace IoTRynningeasenWWW.Controllers
         public static string CurrentPressure = "waiting...";
         public static string CurrentHumidity = "waiting...";
         public static string CurrentTemperature = "waiting...";
+        public static Average Average = new Average();
 
         private readonly IHubContext<MeasurementsHub> _hub;
 
         public MeasurementsController(IHubContext<MeasurementsHub> hub)
         {
             _hub = hub;
+        }
+
+        [HttpPost]
+        [Route("average/temperature/{temperature}")]
+        public IActionResult PostAverage(double temperature)
+        {
+            Average.Temperature = $"{temperature:F1}";
+            _hub.Clients.All.SendAsync("newaverage", Average);
+
+            return Ok();
         }
 
         [HttpPost]
@@ -50,5 +61,10 @@ namespace IoTRynningeasenWWW.Controllers
 
             return Ok();
         }
+    }
+
+    public class Average
+    {
+        public string Temperature { get; set; } = "...";
     }
 }
