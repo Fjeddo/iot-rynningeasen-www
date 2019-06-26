@@ -19,6 +19,14 @@ namespace IoTRynningeasenWWW.Controllers
             _hub = hub;
         }
 
+
+        [HttpGet]
+        [Route("average")]
+        public IActionResult GetAverage()
+        {
+            return Ok(Average);
+        }
+
         [HttpPost]
         [Route("average/temperature")]
         public IActionResult PostAverage([FromBody] AverageRequest temperature)

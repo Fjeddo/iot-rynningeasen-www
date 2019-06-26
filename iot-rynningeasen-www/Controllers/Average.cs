@@ -2,6 +2,6 @@
 {
     public class Average
     {
-        public string Temperature { get; set; } = "...";
+        public string Temperature { get; set; } = "waiting...";
     }
 }

@@ -11,6 +11,16 @@ export default class App extends Component {
   static displayName = App.name;
 
   componentDidMount() {
+
+    fetch("/api/measurements/average").then(response => { 
+      if(response.headers.get('Content-Type').indexOf('application/json') === -1) {
+        return { temperature: "failed..." };
+      }
+      
+      return response.text();
+    }).then(data => ActionCreator.updateAverage(data));
+    
+
     fetch("/api/temperature").then(response => { 
       if(response.headers.get('Content-Type').indexOf('text/plain') === -1) {
         return "failed...";

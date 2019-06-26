@@ -24,7 +24,7 @@ class ActionCreator {
     }
 
     updateAverage(average) {
-        var action = { type : ACTION_TYPES.UPDATE_AVERAGE, data : average };
+        var action = { type : ACTION_TYPES.UPDATE_AVERAGE, data : JSON.parse(average) };
         Dispatcher.dispatch(action);
 
         console.log("Created action: " + JSON.stringify(action));
