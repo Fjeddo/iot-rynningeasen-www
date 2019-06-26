@@ -21,9 +21,9 @@ namespace IoTRynningeasenWWW.Controllers
 
         [HttpPost]
         [Route("average/temperature")]
-        public IActionResult PostAverage([FromBody] double temperature)
+        public IActionResult PostAverage([FromBody] AverageRequest temperature)
         {
-            Average.Temperature = $"{temperature:F1}";
+            Average.Temperature = $"{temperature.Value:F1}";
             _hub.Clients.All.SendAsync("newaverage", Average);
 
             return Ok();
@@ -61,10 +61,5 @@ namespace IoTRynningeasenWWW.Controllers
 
             return Ok();
         }
-    }
-
-    public class Average
-    {
-        public string Temperature { get; set; } = "...";
     }
 }
