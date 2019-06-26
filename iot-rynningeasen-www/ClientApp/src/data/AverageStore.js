@@ -5,7 +5,7 @@ import { ACTION_TYPES } from './ActionTypes';
 class AverageStore extends EventEmitter {
     constructor() {
         super();
-        this.average = {};
+        this.average = { temperature : "..." };
     }
 
     getTemperatureAverage() {

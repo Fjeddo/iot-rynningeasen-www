@@ -20,8 +20,8 @@ namespace IoTRynningeasenWWW.Controllers
         }
 
         [HttpPost]
-        [Route("average/temperature/{temperature}")]
-        public IActionResult PostAverage(double temperature)
+        [Route("average/temperature")]
+        public IActionResult PostAverage([FromBody] double temperature)
         {
             Average.Temperature = $"{temperature:F1}";
             _hub.Clients.All.SendAsync("newaverage", Average);
