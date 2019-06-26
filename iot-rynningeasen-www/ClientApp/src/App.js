@@ -17,7 +17,7 @@ export default class App extends Component {
         return { temperature: "failed..." };
       }
       
-      return response.text();
+      return response.json();
     }).then(data => ActionCreator.updateAverage(data));
     
 
