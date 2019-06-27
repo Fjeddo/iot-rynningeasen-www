@@ -6,10 +6,7 @@ class TemperatureAverage extends React.Component {
         super();
 
         this.getTemperatureAverage = this.getTemperatureAverage.bind(this);
-
-        this.state = {
-            temperatureAverage : AverageStore.getTemperatureAverage()
-        };
+        this.state = AverageStore.getTemperatureAverage();
     }
 
     componentDidMount() {
@@ -21,9 +18,11 @@ class TemperatureAverage extends React.Component {
     }
 
     getTemperatureAverage() {
-        this.setState({
-            temperatureAverage : AverageStore.getTemperatureAverage()
-        });
+	    var avg = AverageStore.getTemperatureAverage();
+	    this.setState({
+		    yesterday: avg.yesterday,
+		    lastWeek: avg.lastWeek
+    });
     }
 
     render() {
@@ -32,8 +31,10 @@ class TemperatureAverage extends React.Component {
 
         return (
             <div>
-                <h3 style={smallHeader}>Average temperature last week</h3>
-                <h2 style={greenSmallText}>{this.state.temperatureAverage}<sup>o</sup>C</h2>
+                <h3 style={smallHeader}>Average temperature yesterday</h3>
+                <h2 style={greenSmallText}>{this.state.yesterday}<sup>o</sup>C</h2>
+				<h3 style={smallHeader}>Average temperature last week</h3>
+				<h2 style={greenSmallText}>{this.state.lastWeek}<sup>o</sup>C</h2>
             </div>
         );
     }

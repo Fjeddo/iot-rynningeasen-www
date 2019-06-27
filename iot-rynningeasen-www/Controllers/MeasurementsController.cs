@@ -28,10 +28,20 @@ namespace IoTRynningeasenWWW.Controllers
         }
 
         [HttpPost]
-        [Route("average/temperature")]
-        public IActionResult PostAverage([FromBody] AverageRequest temperature)
+        [Route("average/temperature/y")]
+        public IActionResult PostAverageY([FromBody] AverageRequest temperature)
         {
-            Average.Temperature = $"{temperature.Value:F1}";
+            Average.Yesterday = $"{temperature.Value:F1}";
+            _hub.Clients.All.SendAsync("newaverage", Average);
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("average/temperature/w")]
+        public IActionResult PostAverageW([FromBody] AverageRequest temperature)
+        {
+            Average.LastWeek = $"{temperature.Value:F1}";
             _hub.Clients.All.SendAsync("newaverage", Average);
 
             return Ok();
