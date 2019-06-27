@@ -1,6 +1,7 @@
 import React from 'react';
 import IFrame from './IFrame';
 import CurrentTemperature from './CurrentTemperature';
+import TemperatureAverage from './TemperatureAverage';
 
 class Temperature extends React.Component {
     render() {    
