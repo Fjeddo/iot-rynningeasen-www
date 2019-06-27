@@ -7,7 +7,8 @@ class Temperature extends React.Component {
 
         return (
             <div>
-                <CurrentTemperature />
+				<div style={{ float: "left" }}><CurrentTemperature /></div>
+				<div style={{ float: "right" }}><TemperatureAverage /></div>
                 <IFrame src={'https://api.thingspeak.com/channels/693480/charts/1?title=Senaste+timmen&width=auto&height=400&results=60&dynamic=true'}/>
                 <IFrame src={'https://api.thingspeak.com/channels/693480/charts/1?title=Senaste+dygnet&width=auto&height=400&days=1&average=20'}/>
                 <IFrame src={'https://api.thingspeak.com/channels/693480/charts/1?title=Senaste+veckan&width=auto&height=400&days=7&average=60'}/>
