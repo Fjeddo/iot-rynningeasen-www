@@ -31,7 +31,7 @@ class CurrentPressure extends React.Component {
 
         return (
             <div>
-                <h3>Current pressure</h3>
+                <h3>Pressure</h3>
                 <h2 style={greenText}>{this.state.currentPressure} hPa</h2>
             </div>
         );

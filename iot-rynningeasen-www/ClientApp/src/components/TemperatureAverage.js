@@ -31,9 +31,9 @@ class TemperatureAverage extends React.Component {
 
         return (
             <div>
-                <h3 style={smallHeader}>Average temperature yesterday</h3>
+                <h3 style={smallHeader}>Average yesterday</h3>
                 <h2 style={greenSmallText}>{this.state.yesterday}<sup>o</sup>C</h2>
-				<h3 style={smallHeader}>Average temperature last week</h3>
+				<h3 style={smallHeader}>Average last week</h3>
 				<h2 style={greenSmallText}>{this.state.lastWeek}<sup>o</sup>C</h2>
             </div>
         );

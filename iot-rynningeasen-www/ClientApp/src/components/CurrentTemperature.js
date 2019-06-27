@@ -31,7 +31,7 @@ class CurrentTemperature extends React.Component {
 
         return (
             <div>
-                <h3>Current temperature</h3>
+                <h3>Temperature</h3>
                 <h2 style={greenText}>{this.state.currentTemperature}<sup>o</sup>C</h2>
             </div>
         );
