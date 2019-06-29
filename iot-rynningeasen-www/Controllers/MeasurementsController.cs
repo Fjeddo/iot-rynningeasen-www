@@ -11,6 +11,7 @@ namespace IoTRynningeasenWWW.Controllers
         public static string CurrentHumidity = "waiting...";
         public static string CurrentTemperature = "waiting...";
         public static Average Average = new Average();
+        public static Max Max = new Max();
 
         private readonly IHubContext<MeasurementsHub> _hub;
 
@@ -43,6 +44,26 @@ namespace IoTRynningeasenWWW.Controllers
         {
             Average.LastWeek = $"{temperature.Value:F1}";
             _hub.Clients.All.SendAsync("newaverage", Average);
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("max/temperature/t")]
+        public IActionResult PostMaxT([FromBody] MaxRequest temperature)
+        {
+            Max.Today = $"{temperature.Value:F1}";
+            _hub.Clients.All.SendAsync("newmax", Max);
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("max/temperature/w")]
+        public IActionResult PostMaxW([FromBody] MaxRequest temperature)
+        {
+            Max.LastWeek = $"{temperature.Value:F1}";
+            _hub.Clients.All.SendAsync("newmax", Max);
 
             return Ok();
         }
