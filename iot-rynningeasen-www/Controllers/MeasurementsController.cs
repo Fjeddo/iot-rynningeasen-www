@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using IotRynningeasenWWW.Models;
+using IotRynningeasenWWW.Models.Requests;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
 namespace IoTRynningeasenWWW.Controllers
@@ -19,8 +21,7 @@ namespace IoTRynningeasenWWW.Controllers
         {
             _hub = hub;
         }
-
-
+        
         [HttpGet]
         [Route("average")]
         public IActionResult GetAverage()

@@ -1,4 +1,4 @@
-﻿namespace IoTRynningeasenWWW.Controllers
+﻿namespace IotRynningeasenWWW.Models
 {
     public class Max
     {

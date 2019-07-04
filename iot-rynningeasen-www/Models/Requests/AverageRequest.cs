@@ -1,4 +1,4 @@
-﻿namespace IoTRynningeasenWWW.Controllers
+﻿namespace IotRynningeasenWWW.Models.Requests
 {
     public class AverageRequest : SingleValueRequest
     {}
