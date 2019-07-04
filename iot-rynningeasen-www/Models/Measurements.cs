@@ -4,25 +4,25 @@ namespace IotRynningeasenWWW.Models
 {
     public class Measurements
     {
-        public State Temperature { get; set; }
-        public State Pressure { get; set; }
-        public State Humidity { get; set; }
+        public State Temperature { get; set; } = new State();
+        public State Pressure { get; set; } = new State();
+        public State Humidity { get; set; } = new State();
     }
 
     public class State
     {
-        public Value Current { get; set; }
-        public Value AverageYesterday { get; set; }
-        public Value AverageLastWeek { get; set; }
-        public Value MaxLastWeek { get; set; }
-        public Value MaxToday { get; set; }
-        public Value MinLastWeek { get; set; }
-        public Value MinToday { get; set; }
+        public Value Current { get; set; } = new Value();
+        public Value AverageYesterday { get; set; } = new Value();
+        public Value AverageLastWeek { get; set; } = new Value();
+        public Value MaxLastWeek { get; set; } = new Value();
+        public Value MaxToday { get; set; } = new Value();
+        public Value MinLastWeek { get; set; } = new Value();
+        public Value MinToday { get; set; } = new Value();
     }
 
     public class Value
     {
-        public double What { get; set; }
+        public double What { get; set; } = double.NaN;
         public DateTimeOffset When { get; set; } = DateTimeOffset.UtcNow;
     }
 }
