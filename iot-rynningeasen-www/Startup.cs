@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,17 @@ namespace IoTRynningeasenWWW
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = Configuration.GetSection("Authorization")["Authority"];
+                options.Audience = Configuration.GetSection("Authorization")["Audience"];
+            });
+
             services.AddSignalR();
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
             services.AddScoped<MeasurementLoggingAttribute>();
@@ -57,6 +69,8 @@ namespace IoTRynningeasenWWW
             app.UseSpaStaticFiles();
 
             app.UseSignalR(routes => { routes.MapHub<MeasurementsHub>("/serverpush"); });
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
