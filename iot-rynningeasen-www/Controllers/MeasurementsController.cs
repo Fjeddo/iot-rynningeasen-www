@@ -21,6 +21,48 @@ namespace IoTRynningeasenWWW.Controllers
         {
             _hub = hub;
         }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            var m = new Measurements
+            {
+                Temperature = new State
+                {
+                    AverageLastWeek = new Value {
+                        What = double.Parse(Average.LastWeek)
+                    },
+                    AverageYesterday = new Value
+                    {
+                        What = double.Parse(Average.Yesterday)
+                    },
+                    Current = new Value
+                    {
+                        What = double.Parse(CurrentTemperature)
+                    },
+                    MaxLastWeek = new Value
+                    {
+                        What = double.Parse(Max.LastWeek)
+                    },
+                    MaxToday = new Value
+                    {
+                        What = double.Parse(Max.Today)
+                    },
+                    MinLastWeek = new Value
+                    {
+                        What = double.MinValue
+                    },
+                    MinToday = new Value
+                    {
+                        What = double.MinValue
+                    }
+                },
+                Humidity = new State(),
+                Pressure = new State()
+            };
+
+            return Ok(m);
+        }
         
         [HttpGet]
         [Route("average")]
