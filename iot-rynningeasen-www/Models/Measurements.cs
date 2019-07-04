@@ -22,6 +22,12 @@ namespace IotRynningeasenWWW.Models
 
     public class Value
     {
+        public void Set(double value)
+        {
+            What = value;
+            When = DateTimeOffset.UtcNow;
+        }
+
         public double What { get; set; } = double.NaN;
         public DateTimeOffset When { get; set; } = DateTimeOffset.UtcNow;
     }

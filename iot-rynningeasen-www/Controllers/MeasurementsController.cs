@@ -41,6 +41,8 @@ namespace IoTRynningeasenWWW.Controllers
         [Route("average/temperature/y")]
         public IActionResult PostAverageY([FromBody] AverageRequest temperature)
         {
+            Measurements.Temperature.AverageYesterday.Set(temperature.Value);
+
             Average.Yesterday = $"{temperature.Value:F1}";
             _hub.Clients.All.SendAsync("newaverage", Average);
 
@@ -51,6 +53,8 @@ namespace IoTRynningeasenWWW.Controllers
         [Route("average/temperature/w")]
         public IActionResult PostAverageW([FromBody] AverageRequest temperature)
         {
+            Measurements.Temperature.AverageLastWeek.Set(temperature.Value);
+
             Average.LastWeek = $"{temperature.Value:F1}";
             _hub.Clients.All.SendAsync("newaverage", Average);
 
@@ -61,6 +65,8 @@ namespace IoTRynningeasenWWW.Controllers
         [Route("max/temperature/t")]
         public IActionResult PostMaxT([FromBody] MaxRequest temperature)
         {
+            Measurements.Temperature.MaxToday.Set(temperature.Value);
+
             Max.Today = $"{temperature.Value:F1}";
             _hub.Clients.All.SendAsync("newmax", Max);
 
@@ -71,6 +77,8 @@ namespace IoTRynningeasenWWW.Controllers
         [Route("max/temperature/w")]
         public IActionResult PostMaxW([FromBody] MaxRequest temperature)
         {
+            Measurements.Temperature.MaxLastWeek.Set(temperature.Value);
+
             Max.LastWeek = $"{temperature.Value:F1}";
             _hub.Clients.All.SendAsync("newmax", Max);
 
@@ -82,6 +90,8 @@ namespace IoTRynningeasenWWW.Controllers
         [TypeFilter(typeof(MeasurementLoggingAttribute), Arguments = new object[] {"temperature"})]
         public IActionResult PostTemperature([FromBody] Temperature temperature)
         {
+            Measurements.Temperature.Current.Set(temperature.Value);
+
             CurrentTemperature = $"{temperature.Value:F1}";
             _hub.Clients.All.SendAsync("newtemperature", CurrentTemperature);
 
@@ -93,6 +103,8 @@ namespace IoTRynningeasenWWW.Controllers
         [TypeFilter(typeof(MeasurementLoggingAttribute), Arguments = new object[] {"pressure"})]
         public IActionResult PostPressure([FromBody] Pressure pressure)
         {
+            Measurements.Pressure.Current.Set(pressure.Value);
+
             CurrentPressure = $"{pressure.Value}";
             _hub.Clients.All.SendAsync("newpressure", CurrentPressure);
 
@@ -104,6 +116,8 @@ namespace IoTRynningeasenWWW.Controllers
         [TypeFilter(typeof(MeasurementLoggingAttribute), Arguments = new object[] { "humidity" })]
         public IActionResult PostHumidity([FromBody] Humidity humidity)
         {
+            Measurements.Humidity.Current.Set(humidity.Value);
+
             CurrentHumidity = $"{humidity.Value}";
             _hub.Clients.All.SendAsync("newhumidity", CurrentHumidity);
 
