@@ -1,4 +1,6 @@
-﻿namespace IoTRynningeasenWWW
+﻿using IoTRynningeasenWWW;
+
+namespace IotRynningeasenWWW.Models
 {
     public class Pressure : ISensor
     {
