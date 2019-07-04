@@ -9,12 +9,6 @@ namespace IoTRynningeasenWWW.Controllers
     [ApiController]
     public class MeasurementsController : ControllerBase
     {
-        public static string CurrentPressure = "waiting...";
-        public static string CurrentHumidity = "waiting...";
-        public static string CurrentTemperature = "waiting...";
-        public static Average Average = new Average();
-        public static Max Max = new Max();
-
         public static Measurements Measurements = new Measurements();
 
         private readonly IHubContext<MeasurementsHub> _hub;
@@ -34,7 +28,12 @@ namespace IoTRynningeasenWWW.Controllers
         [Route("average")]
         public IActionResult GetAverage()
         {
-            return Ok(Average);
+            return Ok(
+                new
+                {
+                    Yesterday = Measurements.Temperature.AverageYesterday.ToClientString(),
+                    LastWeek = Measurements.Temperature.AverageLastWeek.ToClientString()
+                });
         }
 
         [HttpPost]
@@ -42,9 +41,7 @@ namespace IoTRynningeasenWWW.Controllers
         public IActionResult PostAverageY([FromBody] AverageRequest temperature)
         {
             Measurements.Temperature.AverageYesterday.Set(temperature.Value);
-
-            Average.Yesterday = $"{temperature.Value:F1}";
-            _hub.Clients.All.SendAsync("newaverage", Average);
+            _hub.Clients.All.SendAsync("newaverage", Measurements.Temperature.AverageYesterday.ToClientString());
 
             return Ok();
         }
@@ -54,9 +51,7 @@ namespace IoTRynningeasenWWW.Controllers
         public IActionResult PostAverageW([FromBody] AverageRequest temperature)
         {
             Measurements.Temperature.AverageLastWeek.Set(temperature.Value);
-
-            Average.LastWeek = $"{temperature.Value:F1}";
-            _hub.Clients.All.SendAsync("newaverage", Average);
+            _hub.Clients.All.SendAsync("newaverage", Measurements.Temperature.AverageLastWeek.ToClientString());
 
             return Ok();
         }
@@ -66,9 +61,7 @@ namespace IoTRynningeasenWWW.Controllers
         public IActionResult PostMaxT([FromBody] MaxRequest temperature)
         {
             Measurements.Temperature.MaxToday.Set(temperature.Value);
-
-            Max.Today = $"{temperature.Value:F1}";
-            _hub.Clients.All.SendAsync("newmax", Max);
+            _hub.Clients.All.SendAsync("newmax", Measurements.Temperature.MaxToday.ToClientString());
 
             return Ok();
         }
@@ -78,9 +71,7 @@ namespace IoTRynningeasenWWW.Controllers
         public IActionResult PostMaxW([FromBody] MaxRequest temperature)
         {
             Measurements.Temperature.MaxLastWeek.Set(temperature.Value);
-
-            Max.LastWeek = $"{temperature.Value:F1}";
-            _hub.Clients.All.SendAsync("newmax", Max);
+            _hub.Clients.All.SendAsync("newmax", Measurements.Temperature.MaxLastWeek.ToClientString());
 
             return Ok();
         }
@@ -91,9 +82,7 @@ namespace IoTRynningeasenWWW.Controllers
         public IActionResult PostTemperature([FromBody] Temperature temperature)
         {
             Measurements.Temperature.Current.Set(temperature.Value);
-
-            CurrentTemperature = $"{temperature.Value:F1}";
-            _hub.Clients.All.SendAsync("newtemperature", CurrentTemperature);
+            _hub.Clients.All.SendAsync("newtemperature", Measurements.Temperature.Current.ToClientString());
 
             return Ok();
         }
@@ -104,9 +93,7 @@ namespace IoTRynningeasenWWW.Controllers
         public IActionResult PostPressure([FromBody] Pressure pressure)
         {
             Measurements.Pressure.Current.Set(pressure.Value);
-
-            CurrentPressure = $"{pressure.Value}";
-            _hub.Clients.All.SendAsync("newpressure", CurrentPressure);
+            _hub.Clients.All.SendAsync("newpressure", Measurements.Pressure.Current.ToClientString());
 
             return Ok();
         }
@@ -117,9 +104,7 @@ namespace IoTRynningeasenWWW.Controllers
         public IActionResult PostHumidity([FromBody] Humidity humidity)
         {
             Measurements.Humidity.Current.Set(humidity.Value);
-
-            CurrentHumidity = $"{humidity.Value}";
-            _hub.Clients.All.SendAsync("newhumidity", CurrentHumidity);
+            _hub.Clients.All.SendAsync("newhumidity", Measurements.Humidity.Current.ToClientString());
 
             return Ok();
         }

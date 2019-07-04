@@ -7,7 +7,7 @@ namespace IoTRynningeasenWWW.Controllers
     {
         public ActionResult<string> Get()
         {
-            return Ok(MeasurementsController.CurrentHumidity);
+            return Ok($"{MeasurementsController.Measurements.Humidity.Current.What:F1}");
         }
     }
 }

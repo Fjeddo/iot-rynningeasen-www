@@ -7,7 +7,7 @@ namespace IoTRynningeasenWWW.Controllers
     {
         public ActionResult<string> Get()
         {
-            return Ok(MeasurementsController.CurrentTemperature);
+            return Ok($"{MeasurementsController.Measurements.Temperature.Current.What:F1}");
         }
     }
 }

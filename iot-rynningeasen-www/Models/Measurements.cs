@@ -28,6 +28,11 @@ namespace IotRynningeasenWWW.Models
             When = DateTimeOffset.UtcNow;
         }
 
+        public string ToClientString()
+        {
+            return double.IsNaN(What) ? "waiting..." : $"{What:F1}";
+        }
+
         public double What { get; set; } = double.NaN;
         public DateTimeOffset When { get; set; } = DateTimeOffset.UtcNow;
     }
