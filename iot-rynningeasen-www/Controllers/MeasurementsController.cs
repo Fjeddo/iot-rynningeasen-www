@@ -1,5 +1,7 @@
-﻿using IotRynningeasenWWW.Models;
+﻿using System;
+using IotRynningeasenWWW.Models;
 using IotRynningeasenWWW.Models.Requests;
+using log4net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
@@ -105,6 +107,25 @@ namespace IoTRynningeasenWWW.Controllers
         {
             Measurements.Humidity.Current.Set(humidity.Value);
             _hub.Clients.All.SendAsync("newhumidity", Measurements.Humidity.Current.ToClientString());
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("rawsensorsdata")]
+        public IActionResult PostRawSensorsData([FromBody] object sensors)
+        {
+            var logger = LogManager.GetLogger(GetType().Assembly, "rawsensors");
+            if (logger == null)
+            {
+                throw new Exception("No logger found");
+            }
+
+            var sensorsJObject = (Newtonsoft.Json.Linq.JObject) sensors;
+            foreach (var sensor in sensorsJObject)
+            {
+                logger.Info(sensor.Value);
+            }
 
             return Ok();
         }
