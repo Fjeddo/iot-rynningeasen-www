@@ -14,7 +14,7 @@ variables:
 
 steps:
 - task: DotNetCoreCLI@2
-  displayName: Publish
+  displayName: dotnet publish
   inputs:
     command: 'publish'
     publishWebProjects: true
