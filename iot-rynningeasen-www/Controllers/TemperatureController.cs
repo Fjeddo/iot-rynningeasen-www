@@ -8,7 +8,7 @@ namespace IoTRynningeasenWWW.Controllers
         [Route("")]
         public ActionResult<string> Get()
         {
-            return Ok($"{MeasurementsController.Measurements.Temperature.Current.What:F2}");
+            return Ok($"{MeasurementsController.Measurements.Temperature.Current.What:F1}");
         }
         
         [Route("details")]
