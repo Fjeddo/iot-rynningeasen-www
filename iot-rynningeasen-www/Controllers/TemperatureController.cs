@@ -8,13 +8,13 @@ namespace IoTRynningeasenWWW.Controllers
         [Route("")]
         public ActionResult<string> Get()
         {
-            return Ok($"{MeasurementsController.Measurements.Temperature.Current.What:F1}");
+            return Ok($"{MeasurementsController.Measurements.Temperature.Current.What:F2}");
         }
         
         [Route("details")]
         public ActionResult<string> Details()
         {
-            return Ok($"{MeasurementsController.Measurements.Temperature.Current.What:F1} @ {MeasurementsController.Measurements.Temperature.Current.When}");
+            return Ok($"{MeasurementsController.Measurements.Temperature.Current.What:F2} @ {MeasurementsController.Measurements.Temperature.Current.When}");
         }
     }
 }
