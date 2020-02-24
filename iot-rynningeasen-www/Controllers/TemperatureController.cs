@@ -15,7 +15,7 @@ namespace IoTRynningeasenWWW.Controllers
         [Route("details")]
         public ActionResult<string> Details()
         {
-            return Ok($"{MeasurementsController.Measurements.Temperature.Current.What:F1} @ {MeasurementsController.Measurements.Temperature.Current.When}");
+            return Ok($"{MeasurementsController.Measurements.Temperature.Current.What:F2} @ {MeasurementsController.Measurements.Temperature.Current.When}");
         }
     }
 }
