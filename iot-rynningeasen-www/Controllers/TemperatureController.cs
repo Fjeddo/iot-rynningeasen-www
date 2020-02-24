@@ -3,7 +3,8 @@
 namespace IoTRynningeasenWWW.Controllers
 {
     [Route("api/[controller]")]
-    public class TemperatureController : Controller
+    [ApiController]
+    public class TemperatureController : ControllerBase
     {
         [Route("")]
         public ActionResult<string> Get()
