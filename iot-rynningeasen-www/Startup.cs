@@ -1,4 +1,6 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -22,15 +24,20 @@ namespace IoTRynningeasenWWW
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.Authority = Configuration.GetSection("Authorization")["Authority"];
-                options.Audience = Configuration.GetSection("Authorization")["Audience"];
-            });
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //}).AddJwtBearer(options =>
+            //{
+            //    options.Authority = Configuration.GetSection("Authorization")["Authority"];
+            //    options.Audience = Configuration.GetSection("Authorization")["Audience"];
+            //});
+
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("iot-rynningeasen-policy", builder => builder.Requirements.Add(new ));
+            //})
 
             services.AddSignalR();
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });

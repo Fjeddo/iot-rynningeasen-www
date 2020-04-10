@@ -1,4 +1,5 @@
 ﻿using System;
+using IotRynningeasenWWW;
 using IotRynningeasenWWW.Models;
 using IotRynningeasenWWW.Models.Requests;
 using log4net;
@@ -9,6 +10,7 @@ namespace IoTRynningeasenWWW.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ValidateAuthenticationHeader]
     public class MeasurementsController : ControllerBase
     {
         public static Measurements Measurements = new Measurements();
