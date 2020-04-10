@@ -17,9 +17,16 @@ namespace IotRynningeasenWWW
                 return;
             }
 
+            var acceptedApiKey = Startup.Configuration.GetSection("Authorization").GetValue<string>("IoTRynningeasenApiKey");
+
+            if (context.HttpContext.Request.Query["key"].SingleOrDefault() == acceptedApiKey)
+            {
+                return;
+            }
+
             if (context.HttpContext.Request.Headers.TryGetValue("X-IoTRynningeasen-ApiKey", out var headerValues))
             {
-                if (headerValues.SingleOrDefault() == Startup.Configuration.GetSection("Authorization").GetValue<string>("IoTRynningeasenApiKey"))
+                if (headerValues.SingleOrDefault() == acceptedApiKey)
                 {
                     return;
                 }
