@@ -1,12 +1,10 @@
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace IoTRynningeasenWWW
@@ -22,7 +20,7 @@ namespace IoTRynningeasenWWW
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             //services.AddAuthentication(options =>
             //{
@@ -44,7 +42,7 @@ namespace IoTRynningeasenWWW
             services.AddScoped<MeasurementLoggingAttribute>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddLog4Net();
 
@@ -75,7 +73,8 @@ namespace IoTRynningeasenWWW
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
-            app.UseSignalR(routes => { routes.MapHub<MeasurementsHub>("/serverpush"); });
+            app.UseRouting();
+            app.UseEndpoints(builder => builder.MapHub<MeasurementsHub>("/serverpush"));
 
             app.UseAuthentication();
 
