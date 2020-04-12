@@ -30,7 +30,7 @@ namespace IotRynningeasenWWW.Models
 
         public string ToClientString()
         {
-            return double.IsNaN(What) ? "waiting..." : $"{What:F1}";
+            return double.IsNaN(What) ? "waiting..." : FormattableString.Invariant($"{What:F1}");
         }
 
         public double What { get; set; } = double.NaN;

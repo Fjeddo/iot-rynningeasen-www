@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace IoTRynningeasenWWW.Controllers
 {
@@ -9,13 +10,13 @@ namespace IoTRynningeasenWWW.Controllers
         [Route("")]
         public ActionResult<string> Get()
         {
-            return Ok($"{MeasurementsController.Measurements.Temperature.Current.What:F1}");
+            return Ok(FormattableString.Invariant($"{MeasurementsController.Measurements.Temperature.Current.What:F1}"));
         }
         
         [Route("details")]
         public ActionResult<string> Details()
         {
-            return Ok($"{MeasurementsController.Measurements.Temperature.Current.What:F2} @ {MeasurementsController.Measurements.Temperature.Current.When}");
+            return Ok(FormattableString.Invariant($"{MeasurementsController.Measurements.Temperature.Current.What:F2} @ {MeasurementsController.Measurements.Temperature.Current.When}"));
         }
     }
 }
