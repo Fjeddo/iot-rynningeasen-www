@@ -17,6 +17,7 @@ steps:
   displayName: dotnet publish
   inputs:
     command: 'publish'
+    publishWebProjects: false
     projects: |
       **/iot-rynningeasen-www.csproj
       **/iot-rynningeasen-blazorserver.csproj
