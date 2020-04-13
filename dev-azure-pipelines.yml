@@ -17,7 +17,9 @@ steps:
   displayName: dotnet publish
   inputs:
     command: 'publish'
-    publishWebProjects: true
+    projects: |
+      **/iot-rynningeasen-www.csproj
+      **/iot-rynningeasen-blazorserver.csproj
     arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
 - task: PublishBuildArtifacts@1
   displayName: Publish Artifact
